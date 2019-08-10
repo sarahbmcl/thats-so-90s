@@ -1,9 +1,11 @@
+//--------------VARIABLES--------------
+
 const wordList = ["nirvana", "oasis", "radiohead", "weezer", "toadies", "cake"];
 let wordToGuess = "";
-let userGuess;
-let guessesLeft;
+let userGuess =[];
+let guessesLeft = 7;//start at 7
 let guessedLetters = [];
-let letterReveal = []; //shows blanks and revealed letters
+let letterReveal = []; //shows revealed letters
 let correctIndex = [];
 let wins=0; //start at zero
 
@@ -44,8 +46,6 @@ function captureUserInput(){
                 if(userGuess !== undefined){ 
                     if( isGuessCorrect2() ){
                         revealLetter2();
-                    } else if( guessedBefore() === false ){
-                        if(isLetter(userGuess)) wrongGuess();
                     }
 
                     recordGuesses(); //every time key is pressed record the guess
@@ -103,8 +103,9 @@ function isGuessCorrect(){
     return correct;
 }
 
-//log guesses left in response to wron answer
+//log guesses left in response to wrong answer
 function wrongGuess(){
+    console.log(guessesLeft)
     console.log("WRONG");
     guessesLeft--;
     document.getElementById("guesses-left").innerHTML = guessesLeft;
@@ -145,13 +146,13 @@ function revealLetter2(){
 //for each letter, create blanks that populate assigned letter on user guess
 function createBlanks(){
     let theWordBlank;
-    document.getElementById("word").innerHTML = "";
+    document.getElementById("word").innerHTML = " ";
     for(let i=0; i<wordToGuess.length; i++){
         theWordBlank = document.getElementById("word");
-        theWordBlank.innerHTML += " _ ";
+        theWordBlank.innerHTML += " _ ".split(' ');
         letterReveal[i] = " _ "
-        console.log(theWordBlank.innerHTML);
-        console.log(letterReveal);
+        //console.log(theWordBlank.innerHTML);
+        //console.log(letterReveal);
     } 
     document.getElementById("word").innerHTML = letterReveal;
 }
@@ -167,21 +168,18 @@ function recordGuesses(){
         guessedLetters.push(userGuess);
     }
     document.getElementById("guessed").innerHTML = guessedLetters;
-    console.log("recordGuesses " + guessedLetters);
+    //console.log("recordGuesses " + guessedLetters);
 }
-
-//----------END FUNCTIONS----------------
 
 //On reset
 window.onload = function(){
-
     const resetButton = document.getElementById("play-again");
     resetButton.onclick = initialize;
-
     initialize();
-//    randomWord();
-//    createBlanks();
-
+    wrongGuess()
+    randomWord();
+    createBlanks();
     captureUserInput();  
-
 };
+
+//----------END FUNCTIONS----------------
