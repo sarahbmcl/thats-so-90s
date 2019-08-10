@@ -65,7 +65,7 @@ function captureUserInput(){
 
 //winning conditions
 function isWinner(){
-    const winner = true;
+    let winner = true;
     for(let i=0; i<wordToGuess.length; i++ ){
         if(letterReveal[i] !== wordToGuess[i]){
             winner = false;
@@ -93,7 +93,7 @@ function isGameOver(){
 
 //minus 1 for incorrect guesses
 function isGuessCorrect(){
-    const correct = true;
+    let correct = true;
 
     if( wordToGuess.indexOf(userGuess) == -1 ){ //WRONG
         correct = false;
@@ -112,7 +112,7 @@ function wrongGuess(){
 
 //send correct letter guessed by user
 function isGuessCorrect2(){
-    const correct = false;
+    let correct = false;
     for(let i=0; i<wordToGuess.length; i++){     
 
         if(wordToGuess[i] === userGuess){
@@ -144,7 +144,7 @@ function revealLetter2(){
 
 //for each letter, create blanks that populate assigned letter on user guess
 function createBlanks(){
-    const theWordBlank;
+    let theWordBlank;
     document.getElementById("word").innerHTML = "";
     for(let i=0; i<wordToGuess.length; i++){
         theWordBlank = document.getElementById("word");
