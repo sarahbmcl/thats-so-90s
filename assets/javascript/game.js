@@ -1,6 +1,6 @@
 //--------------VARIABLES--------------
 
-const wordList = ["nirvana", "oasis", "radiohead", "weezer", "toadies", "cake"];
+const wordList = ["nirvana", "oasis", "radiohead", "weezer", "toadies", "cake", "tupac", "spice girls"];
 let wordToGuess = "";
 let userGuess =[];
 let guessesLeft = 7;//start at 7
@@ -97,14 +97,19 @@ function isGuessCorrect(){
 
     if( wordToGuess.indexOf(userGuess) == -1 ){ //WRONG
         correct = false;
+        console.log(guessesLeft)
+        console.log("WRONG");
+        guessesLeft--;
+        document.getElementById("guesses-left").innerHTML = guessesLeft;
     }else{ //CORRECT
         correct = true;
     }
-    return correct;
+    return wrongGuess;
 }
 
 //log guesses left in response to wrong answer
 function wrongGuess(){
+    if 
     console.log(guessesLeft)
     console.log("WRONG");
     guessesLeft--;
@@ -183,3 +188,9 @@ window.onload = function(){
 };
 
 //----------END FUNCTIONS----------------
+
+
+
+
+
+
