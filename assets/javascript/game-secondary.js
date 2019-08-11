@@ -1,4 +1,3 @@
-
 const wordList = ["nirvana", "oasis", "radiohead", "weezer", "toadies", "cake", "tupac", "prince", "tlc", "nsync"];
 let rand = "";
 let word = "";
@@ -23,7 +22,6 @@ function reset(){
 	start();
 }
 
-
 function start(){
 	rand = Math.floor(Math.random() * wordList.length)
 	word = wordList[rand];
@@ -45,27 +43,26 @@ function start(){
 	document.querySelector("#guesses").innerHTML = (guesses);
 	document.querySelector("#score").innerHTML = ("Wins: "+ wins + " Losses: "+ losses);
 	}
-//refresh the game board
-function refresh(x){
-	console.log(x);
-	blanks[x] = word[i] + " ";
-	document.querySelector("#input").innerHTML = (blanks.join(" "));
-	
+
+	//refresh the game board
+	function refresh(x){
+		console.log(x);
+		blanks[x] = word[i] + " ";
+		document.querySelector("#input").innerHTML = (blanks.join(" "));
+		
 }
 console.log(blanks);
 
 document.onkeyup = function(event){
 
-	
-
+	//available user choises
 	for(i=0;i<alpha.length;i++){
 		if(event.key === alpha[i]){
 			letterstest = true;
 		}
 	}
 
-
-	//input
+	//user input
 	if(!lock && letterstest){
 		console.log(event.key);
 
@@ -94,7 +91,7 @@ document.onkeyup = function(event){
 			document.querySelector("#letters").innerHTML = (letters);
 		}
 		for (k=0; k < blanks.length; k++){
-			//console.log(blanks[k]);
+			console.log(blanks[k]);
 			if(blanks[k] === '_'){
 				wintest = false;
 			}
@@ -102,23 +99,19 @@ document.onkeyup = function(event){
 
 		
 		if (wintest){
-			document.querySelector("#input").innerHTML = ("All that and a bag of chips");
+			document.querySelector("#input").innerHTML = ("All that and a bag of chips"); //if player wins
 				lock = true;
 				winSound.play();
 				wins++;
 				document.querySelector("#score").innerHTML = ("Wins: "+ wins + " Losses: "+ losses);
-				//start();
-				
-
 			}else
 			if(guesses <= 0){
-				//console.log(guesses);
-				document.querySelector("#input").innerHTML = ("Talk to the hand");
+				console.log(guesses);
+				document.querySelector("#input").innerHTML = ("Talk to the hand"); //if player loses
 				lock = true;
 				loseSound.play();
 				losses++;
 				document.querySelector("#score").innerHTML = ("Wins: "+ wins + " Losses: "+ losses);
-				//start();
-		}			
-	}
+				}			
+			}
 }

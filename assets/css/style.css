@@ -17,17 +17,22 @@
 body{
 	background: url("../images/1000x600_90smusic-web-optimised-1000.jpg");
 	background-size: cover;
-	
 }
 #game-content{
 	margin-top: 30px;
-    background:rgba(245,245,245,.7);
+    background:rgba(245, 245, 245, 0.836);
+    overflow: auto;
 }
 #letters{
-	min-height: 100px;
+    min-height: 100px;
+    overflow: auto;
 }
 #reset{
 	margin-bottom: 30px;
+}
+#guessedLetterWell{
+    overflow-wrap: break-word;
+    word-wrap: break-word;
 }
 h1 {
     font-family: Verdana, Geneva, Tahoma, sans-serif
