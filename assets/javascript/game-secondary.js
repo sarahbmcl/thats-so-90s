@@ -1,4 +1,5 @@
-const words = ["nirvana", "oasis", "radiohead", "weezer", "toadies", "cake"];
+
+const words = ["nirvana", "oasis", "radiohead", "weezer", "toadies", "cake", "tupac", "spice girls"];
 let rand = "";
 let word = "";
 let blanks = [];
@@ -8,9 +9,9 @@ let wins = 0;
 let losses = 0;
 let lock = false;
 let alpha = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
-let open = new Audio('assets/sounds/welcomemusic.wav');
-let dis = new Audio('assets/sounds/sacked.wav');
-let got = new Audio('assets/sounds/touchdown.wav');
+let welcomeSound = new Audio('assets/sounds/welcomemusic.wav');
+let loseSound = new Audio('assets/sounds/sacked.wav');
+let winSound = new Audio('assets/sounds/touchdown.wav');
 
 start();
 
@@ -20,12 +21,13 @@ function sleep(ms){
 
 function reset(){
 	lock = false
+	welcomeSound.play();
 	start();
 }
 
 
 
-//At the start of the function, gain these
+
 function start(){
 	rand = Math.floor(Math.random() * words.length)
 	word = words[rand];
@@ -104,9 +106,9 @@ document.onkeyup = function(event){
 
 		
 		if (wintest){
-			document.querySelector("#input").innerHTML = ("Congrats Champ! ");
+			document.querySelector("#input").innerHTML = ("All that and a bag of chips");
 				lock = true;
-				got.play();
+				winSound.play();
 				wins++;
 				document.querySelector("#score").innerHTML = ("Wins: "+ wins + " Losses: "+ losses);
 				//start();
@@ -115,9 +117,9 @@ document.onkeyup = function(event){
 			}else
 			if(guesses <= 0){
 				//console.log(guesses);
-				document.querySelector("#input").innerHTML = ("Hit the showers");
+				document.querySelector("#input").innerHTML = ("Talk to the hand");
 				lock = true;
-				dis.play();
+				loseSound.play();
 				losses++;
 				document.querySelector("#score").innerHTML = ("Wins: "+ wins + " Losses: "+ losses);
 				//start();

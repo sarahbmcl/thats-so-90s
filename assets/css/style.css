@@ -1,4 +1,6 @@
-#play-again{ display:none; }
+/*original stlying for reset"
+
+/* #play-again{ display:none; }
 #notification{
     font-size:30px;
     font-weight:bold;
@@ -10,4 +12,29 @@
     font-size: 30px;
     display: block;
     margin: 20px 0;
+} */
+
+body{
+	background: url("../images/1000x600_90smusic-web-optimised-1000.jpg");
+	background-size: cover;
+	
+}
+#game-content{
+	margin-top: 30px;
+	background:rgba(245,245,245,.7);
+}
+#letters{
+	min-height: 100px;
+}
+#reset{
+	margin-bottom: 30px;
+}
+h1 {
+    font-family: Verdana, Geneva, Tahoma, sans-serif
+}
+h2 {
+    font-family: Verdana, Geneva, Tahoma, sans-serif
+}
+h4 {
+    font-family: Verdana, Geneva, Tahoma, sans-serif
 }
