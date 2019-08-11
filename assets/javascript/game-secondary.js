@@ -1,5 +1,5 @@
 
-const wordList = ["nirvana", "oasis", "radiohead", "weezer", "toadies", "cake", "tupac", "spice girls"];
+const wordList = ["nirvana", "oasis", "radiohead", "weezer", "toadies", "cake", "tupac", "prince", "tlc", "nsync"];
 let rand = "";
 let word = "";
 let blanks = [];
@@ -9,9 +9,8 @@ let wins = 0;
 let losses = 0;
 let lock = false;
 let alpha = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
-let welcomeSound = new Audio('assets/sounds/welcomemusic.wav');
-let loseSound = new Audio('assets/sounds/sacked.wav');
-let winSound = new Audio('assets/sounds/touchdown.wav');
+let loseSound = new Audio('assets/sounds/scrubs.mp3');
+let winSound = new Audio('assets/sounds/spears.mp3');
 
 start();
 
@@ -21,11 +20,8 @@ function sleep(ms){
 
 function reset(){
 	lock = false
-	welcomeSound.play();
 	start();
 }
-
-
 
 
 function start(){
