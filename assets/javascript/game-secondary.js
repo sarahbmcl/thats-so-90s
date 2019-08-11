@@ -1,5 +1,5 @@
 
-const words = ["nirvana", "oasis", "radiohead", "weezer", "toadies", "cake", "tupac", "spice girls"];
+const wordList = ["nirvana", "oasis", "radiohead", "weezer", "toadies", "cake", "tupac", "spice girls"];
 let rand = "";
 let word = "";
 let blanks = [];
@@ -29,8 +29,8 @@ function reset(){
 
 
 function start(){
-	rand = Math.floor(Math.random() * words.length)
-	word = words[rand];
+	rand = Math.floor(Math.random() * wordList.length)
+	word = wordList[rand];
 	blanks = [];
 	guesses = 8;
 	letters = [];

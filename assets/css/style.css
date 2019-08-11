@@ -21,7 +21,7 @@ body{
 }
 #game-content{
 	margin-top: 30px;
-	background:rgba(245,245,245,.7);
+    background:rgba(245,245,245,.7);
 }
 #letters{
 	min-height: 100px;
