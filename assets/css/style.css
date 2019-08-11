@@ -1,21 +1,6 @@
-/*original stlying for reset"
-
-/* #play-again{ display:none; }
-#notification{
-    font-size:30px;
-    font-weight:bold;
-    margin:20px 0;
-}
-
-#word,
-#guessed{
-    font-size: 30px;
-    display: block;
-    margin: 20px 0;
-} */
-
+/*limited CSS with bootstrap*/
 body{
-	background: url("../images/1000x600_90smusic-web-optimised-1000.jpg");
+	background: url("../images/90s-artists.jpg");
 	background-size: cover;
 }
 #game-content{

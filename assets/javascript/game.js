@@ -1,196 +1,117 @@
-//--------------VARIABLES--------------
+const wordList = ["nirvana", "oasis", "radiohead", "weezer", "toadies", "cake", "tupac", "prince", "tlc", "nsync"];
+let rand = "";
+let word = "";
+let blanks = [];
+let guesses = 0;
+let letters = [];
+let wins = 0;
+let losses = 0;
+let lock = false;
+let alpha = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
+let loseSound = new Audio('assets/sounds/scrubs.mp3');
+let winSound = new Audio('assets/sounds/spears.mp3');
 
-const wordList = ["nirvana", "oasis", "radiohead", "weezer", "toadies", "cake", "tupac", "spice girls"];
-let wordToGuess = "";
-let userGuess =[];
-let guessesLeft = 7;//start at 7
-let guessedLetters = [];
-let letterReveal = []; //shows revealed letters
-let correctIndex = [];
-let wins=0; //start at zero
+start();
 
-//--------------FUNCTIONS--------------
-
-//assign initial value to variables for start of game
-function initialize(){
-    console.log("INITIALIZE");
-    guessesLeft = 7;
-    guessedLetters = [];
-    letterReveal = [];
-    correctIndex = [];
-
-    //returns and records the value
-    document.getElementById("guesses-left").innerHTML = guessesLeft;
-    document.getElementById("guessed").innerHTML = "";
-    document.getElementById("notification").innerHTML = "";
-    document.getElementById("play-again").style.display = "none";
-
-    //assigns blanks to random word
-    randomWord();
-    createBlanks();
+function sleep(ms){
+	return new Promise(resolve =>setTimeout(resolve, ms));
 }
 
-//obtain a random word to guess 
-function randomWord(){
-    wordToGuess = wordList[Math.floor(Math.random()*((wordList.length-1)-1+1)+1)];
+function reset(){
+	lock = false
+	start();
 }
 
-//respond to user keys
-function captureUserInput(){
-    document.onkeyup = function(event){ 
-        console.log(event.key); 
-        userGuess = event.key; 
-        
-        if(!isWinner()){
-            if(!isGameOver()){
-                if(userGuess !== undefined){ 
-                    if( isGuessCorrect2() ){
-                        revealLetter2();
-                    }
+function start(){
+	rand = Math.floor(Math.random() * wordList.length)
+	word = wordList[rand];
+	blanks = [];
+	guesses = 8;
+	letters = [];
 
-                    recordGuesses(); //every time key is pressed record the guess
-                    if(isWinner())winner(); //check winning conditions in reponse to action
-                }
-            }else{
-                console.log("GAME OVER");
-                document.getElementById("notification").innerHTML = "You Lose!";
-                document.getElementById("play-again").style.display = "block";
-            }
-        }else{ //WINNER
-            console.log("WINNER");
-            winner();
-        }
-    }
+	console.log(word);
+
+	//create array of blanks "_ "
+	for (i=0; i<word.length; i++){
+		blanks.push('_');
+	}
+	
+	//join the "_ " array into a string.
+	console.log(blanks.join(" "));
+	document.querySelector("#input").innerHTML = (blanks.join(" "));
+	document.querySelector("#letters").innerHTML = (letters);
+	document.querySelector("#guesses").innerHTML = (guesses);
+	document.querySelector("#score").innerHTML = ("Wins: "+ wins + " Losses: "+ losses);
+	}
+
+	//refresh the game board
+	function refresh(x){
+		console.log(x);
+		blanks[x] = word[i] + " ";
+		document.querySelector("#input").innerHTML = (blanks.join(" "));
+		
 }
+console.log(blanks);
 
-//winning conditions
-function isWinner(){
-    let winner = true;
-    for(let i=0; i<wordToGuess.length; i++ ){
-        if(letterReveal[i] !== wordToGuess[i]){
-            winner = false;
-        }
-    }
-    return winner;
+document.onkeyup = function(event){
+
+	//available user choises
+	for(i=0;i<alpha.length;i++){
+		if(event.key === alpha[i]){
+			letterstest = true;
+		}
+	}
+
+	//user input
+	if(!lock && letterstest){
+		console.log(event.key);
+
+		if (test = false);
+		if (scoretest = false);
+		if (wintest = true);
+
+		for (j = 0; j < letters.length; j++){
+			if (event.key === letters[j]){
+				test = true;
+			}
+		}
+		
+		if(!test){
+			for (i = 0; i < word.length; i++){
+				if (event.key === word[i]){
+				refresh(i);
+				if (scoretest = true);
+				}
+			}
+			if(!scoretest){
+				guesses--;
+				document.querySelector("#guesses").innerHTML = (guesses);
+			}
+			letters.push(event.key);
+			document.querySelector("#letters").innerHTML = (letters);
+		}
+		for (k=0; k < blanks.length; k++){
+			console.log(blanks[k]);
+			if(blanks[k] === '_'){
+				wintest = false;
+			}
+		}
+
+		
+		if (wintest){
+			document.querySelector("#input").innerHTML = ("All that and a bag of chips"); //if player wins
+				lock = true;
+				winSound.play();
+				wins++;
+				document.querySelector("#score").innerHTML = ("Wins: "+ wins + " Losses: "+ losses);
+			}else
+			if(guesses <= 0){
+				console.log(guesses);
+				document.querySelector("#input").innerHTML = ("Talk to the hand"); //if player loses
+				lock = true;
+				loseSound.play();
+				losses++;
+				document.querySelector("#score").innerHTML = ("Wins: "+ wins + " Losses: "+ losses);
+				}			
+			}
 }
-
-//response to winning conditions
-function winner(){
-    wins++;
-    document.getElementById("wins").innerHTML = wins;
-    document.getElementById("notification").innerHTML = "WINNER!";
-    document.getElementById("play-again").style.display = "block";
-}
-
-//response to user reaching 0 guesses left
-function isGameOver(){
-    if(guessesLeft>0){
-        return false;
-    }else{
-        return true;
-    }
-}
-
-//minus 1 for incorrect guesses
-function isGuessCorrect(){
-    let correct = true;
-
-    if( wordToGuess.indexOf(userGuess) == -1 ){ //WRONG
-        correct = false;
-        console.log(guessesLeft)
-        console.log("WRONG");
-        guessesLeft--;
-        document.getElementById("guesses-left").innerHTML = guessesLeft;
-    }else{ //CORRECT
-        correct = true;
-    }
-    return wrongGuess;
-}
-
-//log guesses left in response to wrong answer
-function wrongGuess(){
-    if 
-    console.log(guessesLeft)
-    console.log("WRONG");
-    guessesLeft--;
-    document.getElementById("guesses-left").innerHTML = guessesLeft;
-}
-
-//send correct letter guessed by user
-function isGuessCorrect2(){
-    let correct = false;
-    for(let i=0; i<wordToGuess.length; i++){     
-
-        if(wordToGuess[i] === userGuess){
-            correctIndex.push(i);
-            correct = true;
-        }
-    }
-    return correct;
-}
-
-//log letter from alphabet string on correct guess in lieu of blank
-function revealLetter(){
-    console.log("RIGHT - Reveal Letter");
-    letterReveal[ wordToGuess.indexOf(userGuess) ] = userGuess;
-    console.log(letterReveal.toString());
-    document.getElementById("word").innerHTML = letterReveal;
-}
-
-function revealLetter2(){
-    for(let i=0; i < correctIndex.length; i++){
-       letterReveal[correctIndex[i]] = wordToGuess[correctIndex[i]]; 
-       console.log("letterreveal: " + letterReveal[correctIndex[i]] + "wordtoguess: " + wordToGuess[correctIndex[i]]);
-    }    
-
-    console.log("RIGHT - Reveal Letter");
-    console.log(letterReveal.toString());
-    document.getElementById("word").innerHTML = letterReveal;
-}
-
-//for each letter, create blanks that populate assigned letter on user guess
-function createBlanks(){
-    let theWordBlank;
-    document.getElementById("word").innerHTML = " ";
-    for(let i=0; i<wordToGuess.length; i++){
-        theWordBlank = document.getElementById("word");
-        theWordBlank.innerHTML += " _ ".split(' ');
-        letterReveal[i] = " _ "
-        //console.log(theWordBlank.innerHTML);
-        //console.log(letterReveal);
-    } 
-    document.getElementById("word").innerHTML = letterReveal;
-}
-
-//Guess options from alphabet string
-function isLetter( string ){
-    return (/[a-zA-Z]/.test(string) && string.length === 1 );
-}
-
-//response of user guess action of picking a letter
-function recordGuesses(){
-    if(isLetter(userGuess)){
-        guessedLetters.push(userGuess);
-    }
-    document.getElementById("guessed").innerHTML = guessedLetters;
-    //console.log("recordGuesses " + guessedLetters);
-}
-
-//On reset
-window.onload = function(){
-    const resetButton = document.getElementById("play-again");
-    resetButton.onclick = initialize;
-    initialize();
-    wrongGuess()
-    randomWord();
-    createBlanks();
-    captureUserInput();  
-};
-
-//----------END FUNCTIONS----------------
-
-
-
-
-
-
