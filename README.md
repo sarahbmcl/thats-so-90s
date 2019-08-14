@@ -1,1 +1,1 @@
-# thats-so-90s
+# lottery-generator
