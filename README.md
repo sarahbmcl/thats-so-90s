@@ -21,4 +21,3 @@ The user will have the option to "play again" and continue to register wins and 
 - CSS
 - JavaScript
 - Bootstrap
-- JQuery
